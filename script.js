@@ -6,7 +6,14 @@ const weatherConditions = {
 };
 
 function getWeather() {
-  var city = document.getElementById('cityInput').value;
+  var city = document.getElementById('cityInput').value.trim(); // Trim whitespace from input
+  // Check if the input is a number
+  if (!isNaN(city)) {
+    var weatherInfo = document.getElementById('weatherInfo');
+    weatherInfo.innerHTML = 'Por favor, insira o nome de uma cidade válido.';
+    return; // Exit the function if input is a number
+  }
+  
   var apiKey = 'cebcd482eda57fa9a6714c1c2ba91885';
   var url = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + apiKey + '&units=metric';
   fetch(url)
